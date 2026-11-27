@@ -48,36 +48,90 @@ function mostrarVista(nombre) {
 btnToResolver.addEventListener("click", () => mostrarVista("resolver"));
 document.getElementById("btn-back-entender").addEventListener("click", () => mostrarVista("entender"));
 
-// Prueba de envío al mock de n8n
-const btnEnviar = document.getElementById("btn-enviar");
+// Lógica Pantalla 5: Pasos + Comprobar + Candado de pistas
+const pasos = [];
+let pistasUsadas = 0;
+let pasoNuevoDespuesDePista = false;
+
+const stepsList = document.getElementById("steps-list");
+const inputPaso = document.getElementById("input-paso");
+const btnAddPaso = document.getElementById("btn-add-paso");
 const inputRespuesta = document.getElementById("input-respuesta");
-const feedbackBox = document.getElementById("feedback-box");
+const btnEnviar = document.getElementById("btn-enviar");
+const statusMsg = document.getElementById("status-msg");
+
+const hintPanel = document.getElementById("hint-panel");
 const feedbackTitle = document.getElementById("feedback-title");
 const feedbackText = document.getElementById("feedback-text");
+const lockBox = document.getElementById("lock-box");
+const btnNextHint = document.getElementById("btn-next-hint");
 const hintCount = document.getElementById("hint-count");
 
-btnEnviar.addEventListener("click", async () => {
-  const respuesta = inputRespuesta.value.trim();
-  if (!respuesta) return;
+function renderPasos() {
+  stepsList.innerHTML = pasos.map((p, i) => `<li>${i + 1}. ${p}</li>`).join("");
+}
 
+btnAddPaso.addEventListener("click", () => {
+  const texto = inputPaso.value.trim();
+  if (!texto) return;
+  pasos.push(texto);
+  inputPaso.value = "";
+  renderPasos();
+
+  // Si había una pista bloqueada, al escribir un paso nuevo se desbloquea
+  if (pistasUsadas > 0 && !pasoNuevoDespuesDePista) {
+    pasoNuevoDespuesDePista = true;
+    lockBox.classList.add("hidden");
+    btnNextHint.classList.remove("hidden");
+  }
+});
+
+async function consultarTutor() {
+  const respuesta = inputRespuesta.value.trim() || "sin_respuesta";
   btnEnviar.disabled = true;
-  btnEnviar.textContent = "Consultando a Beto...";
+  btnNextHint.disabled = true;
 
   const res = await enviarIntento({
     estudiante: "EST-014",
     reto: "P8-RESTO-01",
     paso_polya: "resolver",
     fase: "simbolizar",
-    intento: 1,
+    intento: pistasUsadas + 1,
     respuesta,
-    pasos: ["1/3+1/4=7/12", "1-7/12=5/12"],
+    pasos,
   });
 
-  feedbackBox.classList.remove("hidden");
-  feedbackTitle.textContent = res.correcto ? "¡Correcto!" : `Pista ${res.escalon} de 5`;
-  feedbackText.textContent = res.beto.dice;
-  if (!res.correcto) hintCount.textContent = `${res.escalon}/5`;
+  hintPanel.classList.remove("hidden");
+  statusMsg.classList.remove("hidden", "ok", "bad");
+
+  if (res.correcto) {
+    statusMsg.textContent = "✓ ¡Correcto! Sofía tenía $48.";
+    statusMsg.classList.add("ok");
+    feedbackTitle.textContent = "¡Reto resuelto!";
+    feedbackText.textContent = res.beto.dice;
+    lockBox.classList.add("hidden");
+    btnNextHint.classList.add("hidden");
+  } else {
+    pistasUsadas = res.escalon;
+    pasoNuevoDespuesDePista = false;
+    hintCount.textContent = `${pistasUsadas}/5`;
+
+    statusMsg.textContent = "Todavía no. Revisa la pista de Beto.";
+    statusMsg.classList.add("bad");
+    feedbackTitle.textContent = `Pista ${pistasUsadas} de 5`;
+    feedbackText.textContent = res.beto.dice;
+
+    lockBox.classList.remove("hidden");
+    btnNextHint.classList.add("hidden");
+  }
 
   btnEnviar.disabled = false;
-  btnEnviar.textContent = "Comprobar con n8n";
+  btnNextHint.disabled = false;
+}
+
+btnEnviar.addEventListener("click", consultarTutor);
+btnNextHint.addEventListener("click", consultarTutor);
+
+document.getElementById("btn-to-barras").addEventListener("click", () => {
+  alert("Siguiente paso: Pantalla 6 y 7 (Visualizar con barras).");
 });

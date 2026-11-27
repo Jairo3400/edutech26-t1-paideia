@@ -111,7 +111,7 @@ h1 { margin: 2px 0 0; font-size: 1.4rem; }
 }
 .beto-box p { margin: 0; }
 .beto-avatar { font-size: 1.8rem; }
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-weight: 600; }
 .field input {
@@ -134,3 +134,80 @@ h1 { margin: 2px 0 0; font-size: 1.4rem; }
 .btn.primary { background: var(--navy); color: #fff; }
 .btn.primary:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn.secondary { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); }
+
+.prob-compact {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.tag { padding: 2px 6px; border-radius: 5px; font-weight: 700; }
+.tag.c1 { background: var(--c1-bg); color: var(--c1-fg); }
+.tag.c2 { background: var(--c2-bg); color: var(--c2-fg); }
+.tag.c3 { background: var(--c3-bg); color: var(--c3-fg); }
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: grid;
+  gap: 6px;
+}
+.steps-list li {
+  background: #faf9fd;
+  border: 1px dashed #c9c6db;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.step-input-row { display: flex; gap: 8px; }
+.step-input-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+.step-input-row input:focus { outline: none; border-color: var(--navy); }
+
+.btn-small {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--navy);
+  background: #fff;
+  color: var(--navy);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-small.primary { background: var(--navy); color: #fff; }
+
+.status-msg { margin: 8px 0 0; font-size: 0.9rem; font-weight: 700; }
+.status-msg.bad { color: #c8372d; }
+.status-msg.ok { color: #0b7a3b; }
+
+.hint-panel { display: flex; flex-direction: column; gap: 10px; border-color: #d6c9ff; }
+.hint-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #5b21b6;
+}
+.lock-box {
+  background: #f6f5fb;
+  border: 1px dashed #b9b6cc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .app-shell { max-width: 680px; padding: 28px; }
+}

@@ -66,29 +66,53 @@
       </footer>
     </section>
 
-    <!-- VISTA MÍNIMA DE PRUEBA PARA CONEXIÓN CON MOCK/n8n -->
+    <!-- PANTALLA 5: RESOLVER + CANDADO DE PISTAS -->
     <section id="view-resolver" class="view">
+      <div class="prob-compact">
+        Libro <span class="tag c1">1/3 de todo</span> · almuerzo <span class="tag c2">1/4 del resto</span> · quedan <span class="tag c3">$24</span>
+      </div>
+
       <article class="card">
-        <p class="instruction">Prueba rápida de envío al tutor (mock n8n):</p>
-        <label class="field">
-          <span>Tu respuesta ($):</span>
-          <input id="input-respuesta" type="text" placeholder="Ej. 57.6 o 48" />
-        </label>
-        <button id="btn-enviar" class="btn primary">Comprobar con n8n</button>
+        <p class="instruction"><strong>Tu razonamiento</strong> (escribe tus pasos):</p>
+        <ul id="steps-list" class="steps-list"></ul>
+        <div class="step-input-row">
+          <input id="input-paso" type="text" placeholder="Ej. 1/3 + 1/4 = 7/12" />
+          <button id="btn-add-paso" type="button" class="btn-small">+ Paso</button>
+        </div>
       </article>
 
-      <aside id="feedback-box" class="beto-box hidden">
-        <div class="beto-avatar">🐻</div>
-        <div>
-          <strong id="feedback-title"></strong>
+      <article class="card">
+        <label class="field">
+          <span>Tu respuesta ($):</span>
+          <div class="step-input-row">
+            <input id="input-respuesta" type="text" placeholder="Ej. 57.6 o 48" />
+            <button id="btn-enviar" type="button" class="btn-small primary">Comprobar</button>
+          </div>
+        </label>
+        <p id="status-msg" class="status-msg hidden"></p>
+      </article>
+
+      <!-- Panel de pista y candado -->
+      <article id="hint-panel" class="card hint-panel hidden">
+        <div class="hint-header">
+          <span id="feedback-title" class="hint-tag">Pista 1 de 5</span>
+        </div>
+        <div class="beto-box">
+          <div class="beto-avatar">🐻</div>
           <p id="feedback-text"></p>
         </div>
-      </aside>
+        <div id="lock-box" class="lock-box">
+          🔒 <span><strong>Siguiente pista bloqueada.</strong> Escribe un paso nuevo arriba para desbloquearla.</span>
+        </div>
+        <button id="btn-next-hint" type="button" class="btn secondary hidden">Pedir siguiente pista</button>
+      </article>
 
       <footer class="actions">
-        <button id="btn-back-entender" class="btn secondary">← Volver a Entender</button>
+        <button id="btn-back-entender" class="btn secondary">← Entender</button>
+        <button id="btn-to-barras" class="btn primary">Dibujarlo (Barras) →</button>
       </footer>
     </section>
+    
   </main>
 
   <script type="module" src="./app.js"></script>
