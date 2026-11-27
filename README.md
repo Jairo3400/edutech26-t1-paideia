@@ -1,116 +1,178 @@
-Problema
+# 🧠 PAIDEIA
 
-La expansión de herramientas de inteligencia artificial generativa ha transformado la forma en que los estudiantes resuelven tareas escolares. En matemáticas, cada vez es más sencillo obtener una respuesta correcta utilizando asistentes digitales, sin necesariamente comprender el proceso que la produce. Esto dificulta que los docentes distingan entre comprensión genuina y reproducción de respuestas.
+### Aprender resolviendo, demostrar enseñando
 
-Al mismo tiempo, investigaciones internacionales han señalado que una de las principales dificultades en el aprendizaje de las matemáticas no radica únicamente en el cálculo, sino en la comprensión conceptual y en la construcción de estrategias de resolución de problemas. Los estudiantes suelen enfocarse en obtener respuestas correctas sin desarrollar una comprensión profunda de las relaciones matemáticas subyacentes.
+---
 
-Este problema es especialmente relevante en temas como fracciones, proporcionalidad y álgebra inicial, donde los errores suelen originarse en la interpretación del problema más que en la ejecución de operaciones.
+## 🚨 EL PROBLEMA
 
-Según los resultados de PISA 2022, una proporción significativa de estudiantes presenta dificultades para aplicar conceptos matemáticos a situaciones nuevas y para justificar su razonamiento matemático (OECD, 2023).
+📉 Muchos estudiantes llegan a la respuesta correcta sin comprender el proceso matemático que la sustenta.
 
-Además, la UNESCO advierte que la integración de tecnologías educativas genera valor pedagógico únicamente cuando promueve procesos de aprendizaje y no solo la automatización de respuestas (UNESCO, 2023).
+🤖 El crecimiento de las herramientas de IA generativa permite obtener respuestas en segundos, pero no garantiza el desarrollo del razonamiento matemático.
 
-Usuario Objetivo
-Usuario principal: estudiantes de 8°, 9° y 10° de Educación General Básica
+📚 Los docentes suelen evaluar el resultado final, pero cuentan con poca evidencia sobre cómo pensó el estudiante durante la resolución del problema.
 
-Estudiantes que enfrentan dificultades al resolver problemas matemáticos multietapa, particularmente aquellos relacionados con:
+📊 Según PISA 2022, una proporción importante de estudiantes presenta dificultades para aplicar conceptos matemáticos en situaciones nuevas y justificar su razonamiento.
 
-Fracciones.
-Razones y proporciones.
-Porcentajes.
-Álgebra inicial.
-Problemas de cambio y resto.
+---
 
-Estos estudiantes suelen cometer errores de interpretación que no pueden identificarse observando únicamente la respuesta final.
+## 👤 ¿A QUIÉN AYUDAMOS?
 
-Usuario secundario: docentes de matemáticas
+### 🎓 Estudiantes de 8°, 9° y 10° EGB
 
-Docentes que necesitan comprender cómo piensan sus estudiantes y no solamente verificar si una respuesta es correcta o incorrecta.
+✅ Fracciones  
+✅ Razones y proporciones  
+✅ Porcentajes  
+✅ Álgebra inicial  
+✅ Problemas multietapa
 
-Diversas investigaciones muestran que la retroalimentación basada en procesos de pensamiento genera mejores resultados de aprendizaje que la retroalimentación basada exclusivamente en resultados finales (Hattie & Timperley, 2007).
+Necesitan desarrollar comprensión conceptual antes de llegar a la abstracción matemática.
 
-Nuestra Solución
+---
 
-Paideia es una plataforma educativa que transforma la tarea matemática en una experiencia centrada en el razonamiento.
+### 👩‍🏫 Docentes de Matemáticas
 
-A diferencia de los ejercicios tradicionales o de los asistentes de IA que proporcionan respuestas, Paideia:
+Necesitan:
 
-Presenta desafíos matemáticos multietapa.
-Aplica principios del modelo CPA (Concreto-Pictórico-Abstracto).
-Utiliza representaciones visuales mediante modelos de barras.
-Proporciona andamiaje progresivo en forma de pistas.
-Nunca entrega directamente la respuesta.
-Solicita que el estudiante explique el error cometido por una mascota llamada "Beto".
-Genera una huella de razonamiento que puede ser revisada por el docente.
-¿Por qué esta solución?
+✅ Visibilizar el razonamiento estudiantil
 
-Nuestra propuesta se apoya en cuatro líneas consolidadas de investigación educativa.
+✅ Detectar errores conceptuales oportunamente
 
-1. Método CPA
+✅ Recibir evidencia del proceso de aprendizaje
 
-El enfoque CPA (Concrete-Pictorial-Abstract) propone que la comprensión matemática se desarrolla progresivamente desde experiencias concretas, pasando por representaciones visuales y finalmente símbolos abstractos.
+✅ Mejorar la retroalimentación pedagógica
 
-Este modelo se encuentra estrechamente relacionado con la teoría de las representaciones de Jerome Bruner y constituye uno de los fundamentos del enfoque de Matemáticas de Singapur.
+---
 
-Aplicación en Paideia:
+## 💡 NUESTRA SOLUCIÓN
 
-Manipular.
-Visualizar.
-Simbolizar.
-2. Aprendizaje mediante explicaciones
+### PAIDEIA
 
-La literatura educativa muestra que explicar un concepto a otra persona fortalece significativamente el aprendizaje.
+Una plataforma impulsada por IA que convierte la resolución de problemas matemáticos en evidencia de aprendizaje.
 
-Fiorella y Mayer (2013) identifican que la enseñanza generativa mejora la comprensión porque obliga al estudiante a reorganizar y justificar sus conocimientos.
+### ¿Cómo funciona?
 
-Aplicación en Paideia:
+🧩 Aplica el método **CPA**
+(Concreto → Pictórico → Abstracto)
 
-Tras resolver un problema, el estudiante debe explicarle a Beto dónde ocurrió el error utilizando su propio modelo visual.
+📊 Utiliza **Modelos de Barras de Singapur**
 
-3. Andamiaje adaptativo
+💭 Ofrece **pistas adaptativas** según el error detectado
 
-Vygotsky plantea que los estudiantes aprenden mejor cuando reciben ayuda ajustada a sus necesidades dentro de su Zona de Desarrollo Próximo.
+🐻 Incorpora a **Beto**, una mascota que aprende junto al estudiante
 
-Las pistas escalonadas constituyen una forma de andamiaje pedagógico ampliamente respaldada por la evidencia.
+🗣️ El estudiante debe explicarle a Beto dónde está el error
 
-Aplicación en Paideia:
+📈 Genera una **Huella de Razonamiento** para el docente
 
-Las pistas se desbloquean progresivamente y requieren nuevos intentos de razonamiento antes de acceder al siguiente nivel de ayuda.
+🚫 Nunca entrega directamente la respuesta
 
-4. Retroalimentación para el docente
+---
 
-La retroalimentación efectiva no solo identifica errores, sino que permite comprender cómo se produjeron.
+## 🚀 NUESTRA INNOVACIÓN
 
-Aplicación en Paideia:
+### La mayoría de plataformas:
 
-El sistema genera resúmenes de patrones de razonamiento, errores frecuentes y recomendaciones para la discusión en clase.
+✅ Evalúan respuestas
 
-Impacto Esperado
-Para estudiantes
-Mayor comprensión conceptual.
-Menor dependencia de respuestas generadas por IA.
-Desarrollo de estrategias de resolución de problemas.
-Fortalecimiento de habilidades metacognitivas.
-Para docentes
-Visibilidad del razonamiento estudiantil.
-Identificación temprana de errores conceptuales.
-Preparación de discusiones basadas en evidencias reales del curso.
-Para instituciones educativas
-Uso pedagógico responsable de la inteligencia artificial.
-Integración de metodologías respaldadas por evidencia.
-Fortalecimiento del aprendizaje matemático.
-Evidencia Bibliográfica
+❌ No analizan razonamiento
 
-Bruner, J. S. (1966). Toward a Theory of Instruction. Harvard University Press.
+---
 
-Fiorella, L., & Mayer, R. E. (2013). The relative benefits of learning by teaching and teaching expectancy. Contemporary Educational Psychology, 38(4), 281-288.
+### La mayoría de asistentes IA:
 
-Hattie, J., & Timperley, H. (2007). The power of feedback. Review of Educational Research, 77(1), 81-112.
+✅ Entregan soluciones
 
-OECD. (2023). PISA 2022 Results (Volume I): The State of Learning and Equity in Education. OECD Publishing.
+❌ No fortalecen la comprensión conceptual
 
-UNESCO. (2023). Global Education Monitoring Report 2023: Technology in Education. UNESCO.
+---
 
-Vygotsky, L. S. (1978). Mind in Society: The Development of Higher Psychological Processes. Harvard University Press.
+### PAIDEIA:
 
-Carbonneau, K. J., Marley, S. C., & Selig, J. P. (2013). A meta-analysis of the efficacy of teaching mathematics with concrete manipulatives. Journal of Educational Psychology, 105(2), 380-400.
+✅ Analiza procesos de pensamiento
+
+✅ Promueve la reflexión
+
+✅ Convierte los errores en oportunidades de aprendizaje
+
+✅ Entrega evidencia del razonamiento para docentes
+
+---
+
+## 🏗️ FUNDAMENTACIÓN PEDAGÓGICA
+
+### 📚 Método CPA
+**Bruner (1966)**
+
+La comprensión matemática se construye progresivamente desde experiencias concretas, representaciones visuales y finalmente símbolos abstractos.
+
+---
+
+### 🤝 Andamiaje Adaptativo
+**Vygotsky (1978)**
+
+Los estudiantes aprenden mejor cuando reciben apoyo ajustado a sus necesidades.
+
+---
+
+### 🧠 Aprender Enseñando
+**Fiorella & Mayer (2013)**
+
+Explicar un concepto fortalece significativamente el aprendizaje y la comprensión profunda.
+
+---
+
+### 🔄 Retroalimentación Efectiva
+**Hattie & Timperley (2007)**
+
+La mejora ocurre cuando el estudiante comprende su proceso de pensamiento y no solamente el resultado obtenido.
+
+---
+
+## 🎯 IMPACTO ESPERADO
+
+### Estudiantes
+
+✅ Mayor comprensión conceptual
+
+✅ Desarrollo del razonamiento matemático
+
+✅ Menor dependencia de respuestas automáticas
+
+✅ Fortalecimiento de habilidades metacognitivas
+
+---
+
+### Docentes
+
+✅ Evidencia del proceso de aprendizaje
+
+✅ Detección temprana de errores conceptuales
+
+✅ Retroalimentación más precisa
+
+✅ Toma de decisiones basada en datos
+
+---
+
+### Instituciones
+
+✅ Integración responsable de IA en educación
+
+✅ Innovación educativa basada en evidencia
+
+✅ Mejora del aprendizaje matemático
+
+---
+
+## 📚 EVIDENCIA BIBLIOGRÁFICA
+
+- Bruner, J. S. (1966). *Toward a Theory of Instruction*.
+- Vygotsky, L. S. (1978). *Mind in Society*.
+- Hattie, J., & Timperley, H. (2007). *The Power of Feedback*.
+- Fiorella, L., & Mayer, R. E. (2013). *Learning by Teaching*.
+- Carbonneau, K. J., Marley, S. C., & Selig, J. P. (2013). *Teaching Mathematics with Concrete Manipulatives*.
+- OECD. (2023). *PISA 2022 Results*.
+- UNESCO. (2023). *Global Education Monitoring Report: Technology in Education*.
+
+---
