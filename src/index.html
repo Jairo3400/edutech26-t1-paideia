@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17204a" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>PaideIA · Reto 1</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <small class="eyebrow">Reto 1 de 3 · 8.º EGB</small>
+        <h1 id="screen-title">Entender</h1>
+      </div>
+      <div class="hint-badge">Pistas: <span id="hint-count">0/5</span></div>
+    </header>
+
+    <nav class="polya-bar" aria-label="Pasos de Pólya">
+      <span class="step active" data-step="entender">1. Entender</span>
+      <span class="step" data-step="planificar">2. Planificar</span>
+      <span class="step" data-step="resolver">3. Resolver</span>
+      <span class="step" data-step="revisar">4. Revisar</span>
+    </nav>
+
+    <!-- PANTALLA 4: ENTENDER -->
+    <section id="view-entender" class="view active">
+      <article class="card problem-box">
+        <p class="instruction">Toca los <strong>3 datos</strong> y la <strong>pregunta</strong> en el enunciado:</p>
+        <p class="problem-text">
+          Sofía gastó
+          <button type="button" class="token" data-id="d1" data-color="c1">1/3 de su dinero</button>
+          en un libro y
+          <button type="button" class="token" data-id="d2" data-color="c2">1/4 de lo que le quedó</button>
+          en el almuerzo. Todavía tiene
+          <button type="button" class="token" data-id="d3" data-color="c3">$24</button>.
+          <button type="button" class="token" data-id="q" data-color="cq">¿Cuánto dinero tenía al inicio?</button>
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="progress-header">
+          <span>Datos identificados</span>
+          <strong id="found-counter">0 de 4</strong>
+        </div>
+        <div class="progress-track">
+          <div id="found-bar" class="progress-fill"></div>
+        </div>
+        <ul id="checklist" class="checklist">
+          <li data-check="d1" class="pending">Primer gasto: 1/3 de <strong>todo</strong></li>
+          <li data-check="d2" class="pending">Segundo gasto: 1/4 <strong>del resto</strong></li>
+          <li data-check="d3" class="pending">Lo que queda: $24</li>
+          <li data-check="q" class="pending">Me piden: el dinero inicial</li>
+        </ul>
+      </article>
+
+      <aside class="beto-box">
+        <div class="beto-avatar">🐻</div>
+        <p id="beto-msg">Toca cada dato importante antes de empezar a calcular.</p>
+      </aside>
+
+      <footer class="actions">
+        <button id="btn-to-resolver" class="btn primary" disabled>Ya entendí →</button>
+      </footer>
+    </section>
+
+    <!-- VISTA MÍNIMA DE PRUEBA PARA CONEXIÓN CON MOCK/n8n -->
+    <section id="view-resolver" class="view">
+      <article class="card">
+        <p class="instruction">Prueba rápida de envío al tutor (mock n8n):</p>
+        <label class="field">
+          <span>Tu respuesta ($):</span>
+          <input id="input-respuesta" type="text" placeholder="Ej. 57.6 o 48" />
+        </label>
+        <button id="btn-enviar" class="btn primary">Comprobar con n8n</button>
+      </article>
+
+      <aside id="feedback-box" class="beto-box hidden">
+        <div class="beto-avatar">🐻</div>
+        <div>
+          <strong id="feedback-title"></strong>
+          <p id="feedback-text"></p>
+        </div>
+      </aside>
+
+      <footer class="actions">
+        <button id="btn-back-entender" class="btn secondary">← Volver a Entender</button>
+      </footer>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
