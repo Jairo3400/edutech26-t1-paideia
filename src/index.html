@@ -113,6 +113,52 @@
       </footer>
     </section>
     
+    <!-- PANTALLAS 6 Y 7: VISUALIZAR CON BARRAS -->
+    <section id="view-barras" class="view">
+      <div class="prob-compact">
+        Libro <span class="tag c1">1/3 de todo</span> · almuerzo <span class="tag c2">1/4 del resto</span> · quedan <span class="tag c3">$24</span>
+      </div>
+
+      <article class="card bar-card">
+        <div class="bar-head">
+          <span class="phase-pill">Visualizar · CPA</span>
+          <small id="bar-step-label">Paso 1 de 2</small>
+        </div>
+        <p id="bar-instruction" class="instruction">
+          Divide el dinero total en <strong>3 partes iguales</strong> y marca el <strong>libro (1/3)</strong>.
+        </p>
+
+        <!-- Barra interactiva -->
+        <div class="bar-bracket-top">Todo el dinero</div>
+        <div id="bar-container" class="bar-grid cols-3">
+          <button type="button" class="bar-seg" data-idx="0">1/3</button>
+          <button type="button" class="bar-seg" data-idx="1">1/3</button>
+          <button type="button" class="bar-seg" data-idx="2">1/3</button>
+        </div>
+        <div id="bar-legend" class="bar-legend">Toca 1 bloque para marcar el libro.</div>
+
+        <!-- Paso 2: Valor de 1 unidad (oculto al inicio) -->
+        <div id="unit-box" class="unit-box hidden">
+          <p class="instruction">Quedan <strong>3 unidades iguales = $24</strong>. ¿Cuánto vale <strong>1 unidad</strong>?</p>
+          <div class="step-input-row">
+            <input id="input-unidad" type="number" placeholder="Ej. 8" />
+            <button id="btn-check-unidad" type="button" class="btn-small primary">Comprobar</button>
+          </div>
+          <p id="unidad-msg" class="status-msg hidden"></p>
+        </div>
+      </article>
+
+      <aside class="beto-box">
+        <div class="beto-avatar">🐻</div>
+        <p id="bar-beto-msg">Dibujarlo te ayuda a ver cuál es el <strong>nuevo todo</strong> para el almuerzo.</p>
+      </aside>
+
+      <footer class="actions">
+        <button id="btn-barras-back" class="btn secondary">← Resolver</button>
+        <button id="btn-barras-next" class="btn primary" disabled>Dividir el resto en 4 →</button>
+      </footer>
+    </section>
+
   </main>
 
   <script type="module" src="./app.js"></script>

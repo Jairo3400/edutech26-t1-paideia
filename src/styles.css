@@ -211,3 +211,49 @@ h1 { margin: 2px 0 0; font-size: 1.4rem; }
 @media (min-width: 768px) {
   .app-shell { max-width: 680px; padding: 28px; }
 }
+
+.bar-card { border-color: #d6c9ff; }
+.bar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.phase-pill {
+  background: #7c3aed;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.bar-bracket-top {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  border-bottom: 2px solid var(--navy);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+}
+.bar-grid {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.bar-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.bar-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+.bar-seg {
+  height: 58px;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--navy);
+  cursor: pointer;
+  transition: 0.15s;
+}
+.bar-seg.libro { background: var(--c1-bg); color: var(--c1-fg); border-color: #c8372d; }
+.bar-seg.almuerzo { background: var(--c2-bg); color: var(--c2-fg); border-color: #b98100; }
+.bar-seg.queda { background: var(--c3-bg); color: var(--c3-fg); border-color: #0f6b64; }
+
+.bar-legend { font-size: 0.85rem; color: var(--muted); text-align: center; font-weight: 600; }
+.unit-box { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }

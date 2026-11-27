@@ -34,14 +34,16 @@ tokens.forEach((btn) => {
   });
 });
 
-// Navegación básica
 function mostrarVista(nombre) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   document.getElementById(`view-${nombre}`).classList.add("active");
-  screenTitle.textContent = nombre === "entender" ? "Entender" : "Resolver";
 
+  const titulos = { entender: "Entender", resolver: "Resolver", barras: "Planificar" };
+  screenTitle.textContent = titulos[nombre] || "Paideia";
+
+  const pasoActivo = nombre === "barras" ? "planificar" : nombre;
   document.querySelectorAll(".polya-bar .step").forEach((s) => {
-    s.classList.toggle("active", s.dataset.step === nombre);
+    s.classList.toggle("active", s.dataset.step === pasoActivo);
   });
 }
 
@@ -132,6 +134,83 @@ async function consultarTutor() {
 btnEnviar.addEventListener("click", consultarTutor);
 btnNextHint.addEventListener("click", consultarTutor);
 
-document.getElementById("btn-to-barras").addEventListener("click", () => {
-  alert("Siguiente paso: Pantalla 6 y 7 (Visualizar con barras).");
+// Lógica Pantallas 6 y 7: Visualizar con barras
+let pasoBarras = 1;
+const barContainer = document.getElementById("bar-container");
+const barStepLabel = document.getElementById("bar-step-label");
+const barInstruction = document.getElementById("bar-instruction");
+const barLegend = document.getElementById("bar-legend");
+const barBetoMsg = document.getElementById("bar-beto-msg");
+const btnBarrasNext = document.getElementById("btn-barras-next");
+const unitBox = document.getElementById("unit-box");
+const inputUnidad = document.getElementById("input-unidad");
+const btnCheckUnidad = document.getElementById("btn-check-unidad");
+const unidadMsg = document.getElementById("unidad-msg");
+
+document.getElementById("btn-to-barras").addEventListener("click", () => mostrarVista("barras"));
+document.getElementById("btn-barras-back").addEventListener("click", () => mostrarVista("resolver"));
+
+// Paso 1: marcar 1/3 (libro)
+barContainer.addEventListener("click", (e) => {
+  const seg = e.target.closest(".bar-seg");
+  if (!seg) return;
+
+  if (pasoBarras === 1) {
+    barContainer.querySelectorAll(".bar-seg").forEach((s) => s.classList.remove("libro"));
+    seg.classList.add("libro");
+    seg.textContent = "Libro";
+    barLegend.textContent = "✓ Libro marcado (1/3). Quedan 2 bloques sin gastar.";
+    btnBarrasNext.disabled = false;
+  } else if (pasoBarras === 2 && !seg.classList.contains("libro")) {
+    barContainer.querySelectorAll(".bar-seg").forEach((s) => {
+      if (!s.classList.contains("libro")) {
+        s.classList.remove("almuerzo");
+        s.classList.add("queda");
+        s.textContent = "Queda";
+      }
+    });
+    seg.classList.remove("queda");
+    seg.classList.add("almuerzo");
+    seg.textContent = "Alm.";
+    barLegend.textContent = "✓ Almuerzo = 1 unidad (1/4 del resto). Quedan 3 unidades = $24.";
+    unitBox.classList.remove("hidden");
+  }
+});
+
+btnBarrasNext.addEventListener("click", () => {
+  if (pasoBarras === 1) {
+    pasoBarras = 2;
+    barStepLabel.textContent = "Paso 2 de 2";
+    barInstruction.innerHTML = "Ahora todo son <strong>6 unidades iguales</strong>. Toca <strong>1 de las 4 unidades del resto</strong> para el almuerzo.";
+    barContainer.className = "bar-grid cols-6";
+    barContainer.innerHTML = `
+      <button type="button" class="bar-seg libro" disabled>Libro</button>
+      <button type="button" class="bar-seg libro" disabled>Libro</button>
+      <button type="button" class="bar-seg" data-idx="2">Resto</button>
+      <button type="button" class="bar-seg" data-idx="3">Resto</button>
+      <button type="button" class="bar-seg" data-idx="4">Resto</button>
+      <button type="button" class="bar-seg" data-idx="5">Resto</button>
+    `;
+    barLegend.textContent = "Toca 1 bloque del resto para marcar el almuerzo (1/4 del resto).";
+    barBetoMsg.innerHTML = "Fíjate: el libro ocupa 2 unidades y el resto 4. ¡Todas son del <strong>mismo tamaño</strong>!";
+    btnBarrasNext.textContent = "Volver a escribir con números →";
+    btnBarrasNext.disabled = true;
+  } else {
+    mostrarVista("resolver");
+  }
+});
+
+btnCheckUnidad.addEventListener("click", () => {
+  const val = Number(inputUnidad.value);
+  unidadMsg.classList.remove("hidden", "ok", "bad");
+  if (val === 8) {
+    unidadMsg.textContent = "✓ ¡Exacto! 24 ÷ 3 = $8 por unidad. Si todo son 6 unidades, ¿cuánto es 8 × 6?";
+    unidadMsg.classList.add("ok");
+    barContainer.querySelectorAll(".bar-seg.queda").forEach((s) => (s.textContent = "$8"));
+    barBetoMsg.innerHTML = "¡Buenísima! Tu dibujo quedó guardado para explicarle a Beto. Ahora vuelve a <strong>Resolver</strong> y pon el total.";
+    btnBarrasNext.disabled = false;
+  } else {
+    unidadMsg.textContent = "Pista: si 3 unidades iguales valen $24, divide 24 entre 3.";
+    unidadMsg.classList.add("bad");
+  }
 });
