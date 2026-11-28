@@ -12,13 +12,14 @@
   <main class="app-shell">
     <header class="topbar">
       <div>
-        <small class="eyebrow">Reto 1 de 3 · 8.º EGB</small>
+        <small id="screen-eyebrow" class="eyebrow">Reto 1 de 3 · 8.º EGB</small>
         <h1 id="screen-title">Entender</h1>
       </div>
-      <div class="hint-badge">Pistas: <span id="hint-count">0/5</span></div>
+      <div id="hint-badge" class="hint-badge">Pistas: <span id="hint-count">0/5</span></div>
+      <div id="mode-badge" class="mode-badge hidden">Modo profe</div>
     </header>
 
-    <nav class="polya-bar" aria-label="Pasos de Pólya">
+    <nav id="polya-bar" class="polya-bar" aria-label="Pasos de Pólya">
       <span class="step active" data-step="entender">1. Entender</span>
       <span class="step" data-step="planificar">2. Planificar</span>
       <span class="step" data-step="resolver">3. Resolver</span>
@@ -191,6 +192,100 @@
 
       <footer class="actions">
         <button id="btn-to-beto" class="btn primary">Explícale a Beto →</button>
+      </footer>
+    </section>
+
+    <!-- PANTALLA 10: EXPLÍCALE A BETO (ENCUENTRA EL ERROR) -->
+    <section id="view-beto-error" class="view">
+      <aside class="beto-box">
+        <div class="beto-avatar" aria-hidden="true">🐻❓</div>
+        <p>Hice el reto de Sofía y me salió <strong>$57,60</strong>. ¿Dónde me equivoqué?</p>
+      </aside>
+
+      <div class="prob-compact">
+        Libro <span class="tag c1">1/3 de todo</span> · almuerzo <span class="tag c2">1/4 del resto</span> · quedan <span class="tag c3">$24</span>
+      </div>
+
+      <article class="card notebook-card">
+        <div class="notebook-head">Cuaderno de Beto · toca el paso con error</div>
+        <div id="beto-steps" class="beto-steps" role="radiogroup" aria-label="Pasos del cuaderno de Beto">
+          <button type="button" class="beto-step" data-step-idx="1" aria-pressed="false">
+            <span class="step-num">1</span>
+            <span class="step-copy">Gastó 1/3 + 1/4 = 7/12 de su dinero</span>
+            <span class="step-pill">Aquí</span>
+          </button>
+          <button type="button" class="beto-step" data-step-idx="2" aria-pressed="false">
+            <span class="step-num">2</span>
+            <span class="step-copy">Le queda 5/12 = $24</span>
+            <span class="step-pill">Aquí</span>
+          </button>
+          <button type="button" class="beto-step" data-step-idx="3" aria-pressed="false">
+            <span class="step-num">3</span>
+            <span class="step-copy">1/12 = $4,80</span>
+            <span class="step-pill">Aquí</span>
+          </button>
+          <button type="button" class="beto-step" data-step-idx="4" aria-pressed="false">
+            <span class="step-num">4</span>
+            <span class="step-copy">Tenía 4,80 × 12 = $57,60</span>
+            <span class="step-pill">Aquí</span>
+          </button>
+        </div>
+        <p id="beto-error-msg" class="status-msg hidden"></p>
+      </article>
+
+      <p class="helper-note">Son los mismos números que resolviste. Beto cometió el error más común.</p>
+
+      <footer class="actions">
+        <button id="btn-back-resuelto" type="button" class="btn secondary">← Resultado</button>
+        <button id="btn-confirm-beto-step" type="button" class="btn primary" disabled>Este es el paso →</button>
+      </footer>
+    </section>
+
+    <!-- PANTALLA 11: EXPLÍCALE A BETO (CON TU DIBUJO) -->
+    <section id="view-beto-explica" class="view">
+      <article class="card explain-bar-card">
+        <div class="bar-head">
+          <span class="phase-pill teach-pill">Tu dibujo</span>
+          <small id="beto-bar-status">Toca dónde se equivocó</small>
+        </div>
+        <p class="instruction">
+          Señala en tu barra el <strong>resto</strong> (las 4 unidades de donde sale el 1/4 del almuerzo).
+        </p>
+
+        <div class="bar-bracket-top">Todo = 6 unidades iguales</div>
+        <div id="beto-bar-container" class="bar-grid cols-6"></div>
+        <div id="beto-bar-legend" class="bar-legend">Toca cualquiera de las 4 unidades del resto para señalarlo a Beto.</div>
+      </article>
+
+      <article class="card">
+        <div class="explain-label">Tu explicación para Beto</div>
+        <p class="starter-line">
+          <span class="starter-chip">El error está en el paso 1 porque</span>
+        </p>
+        <textarea
+          id="input-explicacion"
+          class="explain-textarea"
+          rows="3"
+          placeholder="Ej. el almuerzo es 1/4 de las 4 unidades que quedaron, no de las 6 totales..."
+        ></textarea>
+        <p id="explicacion-msg" class="status-msg hidden"></p>
+
+        <div class="rubric-row" aria-label="Criterios de explicación">
+          <span id="rub-paso" class="rubric-chip done">✓ Señaló el paso</span>
+          <span id="rub-dibujo" class="rubric-chip">○ Usó su dibujo</span>
+          <span id="rub-porque" class="rubric-chip">○ Dijo por qué</span>
+        </div>
+      </article>
+
+      <aside id="beto-thanks-box" class="beto-box beto-thanks hidden">
+        <div class="beto-avatar" aria-hidden="true">🐻✨</div>
+        <p>¡Ahhh! El almuerzo era <strong>1/4 de las 4 unidades que quedaron</strong> (1/6 del total) y no 1/4 de todo. Gracias, ya lo anoté en mi cuaderno.</p>
+      </aside>
+
+      <footer class="actions">
+        <button id="btn-back-beto-error" type="button" class="btn secondary">← Cuaderno</button>
+        <button id="btn-enviar-explicacion" type="button" class="btn primary">Enviar a Beto</button>
+        <button id="btn-to-reto-nuevo" type="button" class="btn primary hidden">Reto nuevo sin pistas →</button>
       </footer>
     </section>
 

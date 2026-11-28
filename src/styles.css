@@ -272,3 +272,167 @@ h1 { margin: 2px 0 0; font-size: 1.4rem; }
 }
 .stat-box strong { display: block; font-size: 1.5rem; color: var(--navy); }
 .stat-box small { font-size: 0.8rem; color: var(--muted); font-weight: 700; }
+
+/* Pantallas 10 y 11: Explícale a Beto */
+.mode-badge {
+  background: var(--c2-bg);
+  color: var(--c2-fg);
+  border: 1px solid #f0d584;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.notebook-card {
+  background: #fffdf5;
+  border-color: #eadfba;
+}
+.notebook-head {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--c2-fg);
+  margin-bottom: 10px;
+}
+
+.beto-steps {
+  display: grid;
+  gap: 8px;
+}
+.beto-step {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.beto-step:hover {
+  border-color: #b9b6cc;
+}
+.beto-step .step-num {
+  flex: 0 0 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--c2-bg);
+  color: var(--c2-fg);
+  display: grid;
+  place-items: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+.beto-step .step-copy {
+  flex: 1;
+}
+.beto-step .step-pill {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--c1-fg);
+  color: #fff;
+}
+.beto-step.selected {
+  border-color: var(--c1-fg);
+  background: var(--c1-bg);
+}
+.beto-step.selected .step-num {
+  background: var(--c1-fg);
+  color: #fff;
+}
+.beto-step.selected .step-pill {
+  display: inline-block;
+}
+
+.helper-note {
+  margin: 0;
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.explain-bar-card {
+  border-color: #f0d584;
+}
+.teach-pill {
+  background: var(--c2-bg);
+  color: var(--c2-fg);
+}
+.bar-seg.resto-highlight {
+  box-shadow: 0 0 0 3px #7c3aed inset;
+  border-color: #5b21b6;
+}
+
+.explain-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--c2-fg);
+  margin-bottom: 8px;
+}
+.starter-line {
+  margin: 0 0 8px;
+}
+.starter-chip {
+  display: inline-block;
+  background: var(--c2-bg);
+  color: var(--c2-fg);
+  padding: 3px 8px;
+  border-radius: 7px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.explain-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.94rem;
+  color: var(--navy);
+  resize: vertical;
+  min-height: 78px;
+}
+.explain-textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+
+.rubric-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.rubric-chip {
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 9px;
+  border-radius: 99px;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.rubric-chip.done {
+  background: var(--c3-bg);
+  color: var(--c3-fg);
+  border-color: transparent;
+}
+
+.beto-thanks {
+  background: #e9f8ee;
+  border-color: #9fd8b6;
+}

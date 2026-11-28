@@ -12,6 +12,10 @@ const foundBar = document.getElementById("found-bar");
 const betoMsg = document.getElementById("beto-msg");
 const btnToResolver = document.getElementById("btn-to-resolver");
 const screenTitle = document.getElementById("screen-title");
+const screenEyebrow = document.getElementById("screen-eyebrow");
+const hintBadge = document.getElementById("hint-badge");
+const modeBadge = document.getElementById("mode-badge");
+const polyaBar = document.getElementById("polya-bar");
 
 // Lógica Pantalla 4: Entender
 tokens.forEach((btn) => {
@@ -38,13 +42,28 @@ function mostrarVista(nombre) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   document.getElementById(`view-${nombre}`).classList.add("active");
 
-  const titulos = { entender: "Entender", resolver: "Resolver", barras: "Planificar", resuelto: "¡Resuelto!" };
+  const titulos = {
+    entender: "Entender",
+    resolver: "Resolver",
+    barras: "Planificar",
+    resuelto: "¡Resuelto!",
+    "beto-error": "Revisa a Beto",
+    "beto-explica": "Explícale",
+  };
   screenTitle.textContent = titulos[nombre] || "Paideia";
 
-  const pasoActivo = nombre === "barras" ? "planificar" : nombre === "resuelto" ? "revisar" : nombre;
-  document.querySelectorAll(".polya-bar .step").forEach((s) => {
-    s.classList.toggle("active", s.dataset.step === pasoActivo);
-  });
+  const esModoBeto = nombre === "beto-error" || nombre === "beto-explica";
+  screenEyebrow.textContent = esModoBeto ? "Reto 2 de 3 · 8.º EGB" : "Reto 1 de 3 · 8.º EGB";
+  hintBadge.classList.toggle("hidden", esModoBeto);
+  modeBadge.classList.toggle("hidden", !esModoBeto);
+  polyaBar.classList.toggle("hidden", esModoBeto);
+
+  if (!esModoBeto) {
+    const pasoActivo = nombre === "barras" ? "planificar" : nombre === "resuelto" ? "revisar" : nombre;
+    document.querySelectorAll(".polya-bar .step").forEach((s) => {
+      s.classList.toggle("active", s.dataset.step === pasoActivo);
+    });
+  }
 }
 
 btnToResolver.addEventListener("click", () => mostrarVista("resolver"));
@@ -141,6 +160,7 @@ btnNextHint.addEventListener("click", consultarTutor);
 
 // Lógica Pantallas 6 y 7: Visualizar con barras
 let pasoBarras = 1;
+let almuerzoIdxGuardado = 2;
 const barContainer = document.getElementById("bar-container");
 const barStepLabel = document.getElementById("bar-step-label");
 const barInstruction = document.getElementById("bar-instruction");
@@ -177,6 +197,7 @@ barContainer.addEventListener("click", (e) => {
     seg.classList.remove("queda");
     seg.classList.add("almuerzo");
     seg.textContent = "Alm.";
+    almuerzoIdxGuardado = Number(seg.dataset.idx);
     barLegend.textContent = "✓ Almuerzo = 1 unidad (1/4 del resto). Quedan 3 unidades = $24.";
     unitBox.classList.remove("hidden");
   }
@@ -229,5 +250,149 @@ btnToResuelto.addEventListener("click", () => {
 });
 
 document.getElementById("btn-to-beto").addEventListener("click", () => {
-  alert("Siguiente paso: Pantallas 10 y 11 (Explícale a Beto).");
+  mostrarVista("beto-error");
+});
+
+// Lógica Pantalla 10: Explícale a Beto (encuentra el error)
+let pasoBetoSeleccionado = null;
+const betoStepsContainer = document.getElementById("beto-steps");
+const betoErrorMsg = document.getElementById("beto-error-msg");
+const btnConfirmBetoStep = document.getElementById("btn-confirm-beto-step");
+
+document.getElementById("btn-back-resuelto").addEventListener("click", () => mostrarVista("resuelto"));
+
+betoStepsContainer.addEventListener("click", (e) => {
+  const btn = e.target.closest(".beto-step");
+  if (!btn) return;
+
+  pasoBetoSeleccionado = Number(btn.dataset.stepIdx);
+  betoStepsContainer.querySelectorAll(".beto-step").forEach((s) => {
+    const activo = s === btn;
+    s.classList.toggle("selected", activo);
+    s.setAttribute("aria-pressed", String(activo));
+  });
+  betoErrorMsg.classList.add("hidden");
+  btnConfirmBetoStep.disabled = false;
+});
+
+btnConfirmBetoStep.addEventListener("click", () => {
+  if (pasoBetoSeleccionado === 1) {
+    betoErrorMsg.classList.add("hidden");
+    renderBarraParaBeto();
+    mostrarVista("beto-explica");
+  } else {
+    betoErrorMsg.textContent =
+      "Ese cálculo sigue lo que Beto escribió antes. Revisa en qué paso mezcló fracciones de distintos totales.";
+    betoErrorMsg.classList.remove("hidden", "ok");
+    betoErrorMsg.classList.add("bad");
+  }
+});
+
+// Lógica Pantalla 11: Explícale a Beto (con tu dibujo)
+let dibujoSenaladoParaBeto = false;
+let explicacionCompletada = false;
+const betoBarContainer = document.getElementById("beto-bar-container");
+const betoBarStatus = document.getElementById("beto-bar-status");
+const betoBarLegend = document.getElementById("beto-bar-legend");
+const inputExplicacion = document.getElementById("input-explicacion");
+const explicacionMsg = document.getElementById("explicacion-msg");
+const rubDibujo = document.getElementById("rub-dibujo");
+const rubPorque = document.getElementById("rub-porque");
+const betoThanksBox = document.getElementById("beto-thanks-box");
+const btnEnviarExplicacion = document.getElementById("btn-enviar-explicacion");
+const btnToRetoNuevo = document.getElementById("btn-to-reto-nuevo");
+
+document.getElementById("btn-back-beto-error").addEventListener("click", () => mostrarVista("beto-error"));
+
+function renderBarraParaBeto() {
+  betoBarContainer.innerHTML = "";
+  for (let i = 0; i < 6; i++) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.dataset.idx = String(i);
+    if (i < 2) {
+      btn.className = "bar-seg libro";
+      btn.textContent = "Libro";
+    } else if (i === almuerzoIdxGuardado) {
+      btn.className = "bar-seg almuerzo";
+      btn.textContent = "Alm.";
+    } else {
+      btn.className = "bar-seg queda";
+      btn.textContent = "$8";
+    }
+    if (dibujoSenaladoParaBeto && i >= 2) {
+      btn.classList.add("resto-highlight");
+    }
+    betoBarContainer.appendChild(btn);
+  }
+}
+
+function textoExplicaPorque(texto) {
+  const limpio = texto.trim().toLowerCase();
+  if (limpio.length >= 30) return true;
+  if (limpio.length < 15) return false;
+  return /(resto|qued|unidad|todo|almuerzo|libro|fracci|parte|cuarto|sexto|1\/4|1\/6|4|6)/.test(limpio);
+}
+
+function actualizarRubrica() {
+  rubDibujo.classList.toggle("done", dibujoSenaladoParaBeto);
+  rubDibujo.textContent = dibujoSenaladoParaBeto ? "✓ Usó su dibujo" : "○ Usó su dibujo";
+
+  const tienePorque = textoExplicaPorque(inputExplicacion.value);
+  rubPorque.classList.toggle("done", tienePorque);
+  rubPorque.textContent = tienePorque ? "✓ Dijo por qué" : "○ Dijo por qué";
+}
+
+betoBarContainer.addEventListener("click", (e) => {
+  const seg = e.target.closest(".bar-seg");
+  if (!seg) return;
+
+  const idx = Number(seg.dataset.idx);
+  if (idx < 2) {
+    betoBarLegend.textContent = "Esas 2 unidades son del libro (1/3). Señala las 4 unidades que quedaron después del libro.";
+    return;
+  }
+
+  dibujoSenaladoParaBeto = true;
+  betoBarContainer.querySelectorAll(".bar-seg").forEach((s) => {
+    s.classList.toggle("resto-highlight", Number(s.dataset.idx) >= 2);
+  });
+  betoBarStatus.textContent = "✓ Resto señalado";
+  betoBarLegend.textContent = "✓ 1/4 sale de estas 4 unidades del resto (1 unidad = 1/6 del total), no de las 6.";
+  explicacionMsg.classList.add("hidden");
+  actualizarRubrica();
+});
+
+inputExplicacion.addEventListener("input", () => {
+  explicacionMsg.classList.add("hidden");
+  actualizarRubrica();
+});
+
+btnEnviarExplicacion.addEventListener("click", () => {
+  const tienePorque = textoExplicaPorque(inputExplicacion.value);
+  explicacionMsg.classList.remove("hidden", "ok", "bad");
+
+  if (!dibujoSenaladoParaBeto) {
+    explicacionMsg.textContent = "Primero señala en tu barra las 4 unidades del resto para mostrárselo a Beto.";
+    explicacionMsg.classList.add("bad");
+    return;
+  }
+
+  if (!tienePorque) {
+    explicacionMsg.textContent = "Cuéntale un poco más a Beto: ¿de qué parte salió el 1/4 del almuerzo?";
+    explicacionMsg.classList.add("bad");
+    return;
+  }
+
+  explicacionCompletada = true;
+  explicacionMsg.textContent = "✓ Explicación guardada en tu huella de razonamiento.";
+  explicacionMsg.classList.add("ok");
+  betoThanksBox.classList.remove("hidden");
+  btnEnviarExplicacion.classList.add("hidden");
+  btnToRetoNuevo.classList.remove("hidden");
+  actualizarRubrica();
+});
+
+btnToRetoNuevo.addEventListener("click", () => {
+  alert("Siguiente paso: Pantalla 12 (Reto nuevo sin pistas) y Pantalla 13 (Tu huella).");
 });
