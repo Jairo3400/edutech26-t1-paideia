@@ -38,10 +38,10 @@ function mostrarVista(nombre) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   document.getElementById(`view-${nombre}`).classList.add("active");
 
-  const titulos = { entender: "Entender", resolver: "Resolver", barras: "Planificar" };
+  const titulos = { entender: "Entender", resolver: "Resolver", barras: "Planificar", resuelto: "¡Resuelto!" };
   screenTitle.textContent = titulos[nombre] || "Paideia";
 
-  const pasoActivo = nombre === "barras" ? "planificar" : nombre;
+  const pasoActivo = nombre === "barras" ? "planificar" : nombre === "resuelto" ? "revisar" : nombre;
   document.querySelectorAll(".polya-bar .step").forEach((s) => {
     s.classList.toggle("active", s.dataset.step === pasoActivo);
   });
@@ -54,6 +54,8 @@ document.getElementById("btn-back-entender").addEventListener("click", () => mos
 const pasos = [];
 let pistasUsadas = 0;
 let pasoNuevoDespuesDePista = false;
+let intentos = 0;
+const btnToResuelto = document.getElementById("btn-to-resuelto");
 
 const stepsList = document.getElementById("steps-list");
 const inputPaso = document.getElementById("input-paso");
@@ -92,6 +94,7 @@ async function consultarTutor() {
   const respuesta = inputRespuesta.value.trim() || "sin_respuesta";
   btnEnviar.disabled = true;
   btnNextHint.disabled = true;
+  intentos++;
 
   const res = await enviarIntento({
     estudiante: "EST-014",
@@ -113,6 +116,7 @@ async function consultarTutor() {
     feedbackText.textContent = res.beto.dice;
     lockBox.classList.add("hidden");
     btnNextHint.classList.add("hidden");
+    btnToResuelto.classList.remove("hidden");
   } else {
     pistasUsadas = res.escalon;
     pasoNuevoDespuesDePista = false;
@@ -125,6 +129,7 @@ async function consultarTutor() {
 
     lockBox.classList.remove("hidden");
     btnNextHint.classList.add("hidden");
+    btnToResuelto.classList.add("hidden");
   }
 
   btnEnviar.disabled = false;
@@ -213,4 +218,16 @@ btnCheckUnidad.addEventListener("click", () => {
     unidadMsg.textContent = "Pista: si 3 unidades iguales valen $24, divide 24 entre 3.";
     unidadMsg.classList.add("bad");
   }
+});
+
+// Lógica Pantalla 9: Reto resuelto
+btnToResuelto.addEventListener("click", () => {
+  document.getElementById("stat-intentos").textContent = intentos;
+  document.getElementById("stat-pistas").textContent = pistasUsadas;
+  document.getElementById("stat-pasos").textContent = pasos.length;
+  mostrarVista("resuelto");
+});
+
+document.getElementById("btn-to-beto").addEventListener("click", () => {
+  alert("Siguiente paso: Pantallas 10 y 11 (Explícale a Beto).");
 });

@@ -257,3 +257,18 @@ h1 { margin: 2px 0 0; font-size: 1.4rem; }
 
 .bar-legend { font-size: 0.85rem; color: var(--muted); text-align: center; font-weight: 600; }
 .unit-box { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
+
+.win-hero { text-align: center; padding: 24px 16px; }
+.win-icon { font-size: 2.6rem; margin-bottom: 6px; }
+.win-hero h2 { margin: 0 0 6px; font-size: 1.5rem; }
+
+.stats-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+}
+.stat-box strong { display: block; font-size: 1.5rem; color: var(--navy); }
+.stat-box small { font-size: 0.8rem; color: var(--muted); font-weight: 700; }

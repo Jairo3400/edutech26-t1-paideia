@@ -105,6 +105,7 @@
           🔒 <span><strong>Siguiente pista bloqueada.</strong> Escribe un paso nuevo arriba para desbloquearla.</span>
         </div>
         <button id="btn-next-hint" type="button" class="btn secondary hidden">Pedir siguiente pista</button>
+        <button id="btn-to-resuelto" type="button" class="btn primary hidden">Ver mi resultado →</button>
       </article>
 
       <footer class="actions">
@@ -156,6 +157,40 @@
       <footer class="actions">
         <button id="btn-barras-back" class="btn secondary">← Resolver</button>
         <button id="btn-barras-next" class="btn primary" disabled>Dividir el resto en 4 →</button>
+      </footer>
+    </section>
+
+    <!-- PANTALLA 9: RETO RESUELTO -->
+    <section id="view-resuelto" class="view">
+      <article class="card win-hero">
+        <div class="win-icon">🎉🐻🎉</div>
+        <h2>Sofía tenía $48</h2>
+        <p class="instruction">Lo descubriste usando tu razonamiento y las barras.</p>
+      </article>
+
+      <div class="stats-3">
+        <div class="stat-box"><strong id="stat-intentos">0</strong><small>intentos</small></div>
+        <div class="stat-box"><strong id="stat-pistas">0</strong><small>pistas</small></div>
+        <div class="stat-box"><strong id="stat-pasos">0</strong><small>pasos escritos</small></div>
+      </div>
+
+      <article class="card">
+        <div class="progress-header">
+          <span>Problemas de resto</span>
+          <strong>2 de 3 para dominarla</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 66%"></div>
+        </div>
+      </article>
+
+      <aside class="beto-box">
+        <div class="beto-avatar">🐻</div>
+        <p>Yo hice <strong>este mismo reto</strong> y me salió <strong>$57,60</strong>… ¿me ayudas a ver qué hice mal?</p>
+      </aside>
+
+      <footer class="actions">
+        <button id="btn-to-beto" class="btn primary">Explícale a Beto →</button>
       </footer>
     </section>
 
